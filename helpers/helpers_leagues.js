@@ -11,6 +11,16 @@ exports.getLeagues = function(req, res) {
     });
 };
 
+exports.createLeague = function(req, res) {
+  League.create(req.body)
+    .then(function(newLeague) {
+      res.status(201).json(newLeague);
+    })
+    .catch(function(err) {
+      res.send(err);
+    });
+};
+
 exports.getLeague = function(req, res) {
   League.findById(req.params.leagueId)
     .then(function(foundLeague) {

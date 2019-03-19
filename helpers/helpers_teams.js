@@ -11,6 +11,16 @@ exports.getTeams = function(req, res) {
     });
 };
 
+exports.createTeam = function(req, res) {
+  Team.create(req.body)
+    .then(function(newTeam) {
+      res.status(201).json(newTeam);
+    })
+    .catch(function(err) {
+      res.send(err);
+    });
+};
+
 exports.getTeam = function(req, res) {
   Team.findById(req.params.teamId)
     .then(function(foundTeam) {

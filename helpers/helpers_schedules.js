@@ -11,6 +11,16 @@ exports.getSchedules = function(req, res) {
     });
 };
 
+exports.createSchedule = function(req, res) {
+  Schedule.create(req.body)
+    .then(function(newSchedule) {
+      res.status(201).json(newSchedule);
+    })
+    .catch(function(err) {
+      res.send(err);
+    });
+};
+
 exports.getSchedule = function(req, res) {
   Schedule.findById(req.params.scheduleId)
     .then(function(foundSchedule) {
