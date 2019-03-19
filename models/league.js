@@ -4,7 +4,8 @@ const leagueSchema = new mongoose.Schema(
   {
     leagueName: {
       type: String,
-      required: true
+      required: true,
+      minlength: 3
     },
     teams: [
       {

@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
 
 const teamSchema = new mongoose.Schema({
+  teamName: {
+    type: String,
+    default: "Team",
+    required: true,
+    minlength: 3
+  },
   players: [
     {
       type: mongoose.Schema.Types.ObjectId,

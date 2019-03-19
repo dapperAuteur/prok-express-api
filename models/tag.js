@@ -4,11 +4,13 @@ const tagSchema = new mongoose.Schema(
   {
     tagName: {
       type: String,
-      required: true
+      required: true,
+      minlength: 3
     },
     tagDescription: {
       type: String,
-      required: true
+      required: true,
+      minlength: 3
     }
   },
   {

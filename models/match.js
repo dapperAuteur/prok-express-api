@@ -55,7 +55,25 @@ const matchSchema = new mongoose.Schema(
     },
     currentInning: {
       type: String,
-      default: "Bottom 1"
+      default: "Bottom 1",
+      enum: [
+        "Bottom 1st",
+        "Top 1st",
+        "Bottom 2nd",
+        "Top 2nd",
+        "Bottom 3rd",
+        "Top 3rd",
+        "Bottom 4th",
+        "Top 4th",
+        "Bottom 5th",
+        "Top 5th",
+        "Bottom 6th",
+        "Top 6th"
+      ]
+    },
+    extraInnings: {
+      type: Boolean,
+      default: false
     },
     balls: {
       type: Number,
