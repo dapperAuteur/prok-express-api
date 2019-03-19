@@ -7,6 +7,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true
     },
+    userRole: {
+      type: String,
+      required: true,
+      default: "3"
+    },
     profilePicture: {
       type: String
     },

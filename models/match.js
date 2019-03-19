@@ -6,6 +6,12 @@ const matchSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Team"
     },
+    homeTeamKickingOrder: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Player"
+      }
+    ],
     homeTeamScore: {
       type: Number,
       default: 0,
@@ -15,6 +21,12 @@ const matchSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Team"
     },
+    awayTeamKickingOrder: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Player"
+      }
+    ],
     awayTeamScore: {
       type: Number,
       default: 0,
