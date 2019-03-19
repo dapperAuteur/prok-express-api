@@ -53,6 +53,38 @@ const matchSchema = new mongoose.Schema(
     field: {
       type: String
     },
+    currentInning: {
+      type: String,
+      default: "Bottom 1"
+    },
+    balls: {
+      type: Number,
+      default: 0,
+      min: 0,
+      max: 4
+    },
+    strikes: {
+      type: Number,
+      default: 0,
+      min: 0,
+      max: 3
+    },
+    fouls: {
+      type: Number,
+      default: 0,
+      min: 0,
+      max: 4
+    },
+    outs: {
+      type: Number,
+      default: 0,
+      min: 0,
+      max: 3
+    },
+    encroachmentWarning: {
+      type: Boolean,
+      default: false
+    },
     matchLength: {
       type: Number,
       default: 6,
