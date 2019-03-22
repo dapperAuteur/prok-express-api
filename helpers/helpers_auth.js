@@ -2,10 +2,8 @@ const db = require("./../models");
 const User = db.User;
 
 exports.signin = function(req, res) {
-  console.log("req.body", req.body);
-  User.findOne({ email: req.body.username })
+  User.findOne({ username: req.body.username })
     .then(function(user) {
-      console.log("user", user);
       user.comparePassword(req.body.password, function(err, isMatch) {
         if (isMatch) {
           user.password = "";
