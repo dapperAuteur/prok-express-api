@@ -33,4 +33,14 @@ exports.signup = function(req, res, next) {
     });
 };
 
+exports.signout = function(req, res) {
+  req.session.destroy(err => {
+    if (err) {
+      res.status(400).json(err);
+    }
+    res.clearCookie(SESS_NAME);
+    res.status(201).json({ message: "user logged out" });
+  });
+};
+
 module.exports = exports;
