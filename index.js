@@ -1,8 +1,13 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const session = require("express-session");
+const mongoose = require("mongoose");
+const MongoStore = require("connect-mongo")(session);
 
+const authRoutes = require("./routes/routes_auth");
 const leagueRoutes = require("./routes/routes_leagues");
 const matchRoutes = require("./routes/routes_matches");
 const playerRoutes = require("./routes/routes_players");
@@ -11,7 +16,24 @@ const tagRoutes = require("./routes/routes_tags");
 const teamRoutes = require("./routes/routes_teams");
 const userRoutes = require("./routes/routes_users");
 
+const MAX_AGE = 1000 * 60 * 5;
+const IN_PROD = process.env.NODE_ENV === "production";
+
 app.use(cors());
+app.use(
+  session({
+    cookie: {
+      maxAge: MAX_AGE,
+      sameSite: true,
+      secure: IN_PROD
+    },
+    name: process.env.SESS_NAME,
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.SESSION_SECRET,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+  })
+);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -74,6 +96,8 @@ app.patch(`${apiVersion}/users/:userId`, userRoutes);
 app.put(`${apiVersion}/users/:userId`, userRoutes);
 app.delete(`${apiVersion}/users/:userId`, userRoutes);
 app.use(`${apiVersion}/users`, userRoutes);
+
+app.use(`${apiVersion}/auth`, authRoutes);
 
 const PORT = process.env.PORT || 8080;
 

@@ -57,18 +57,19 @@ const matchSchema = new mongoose.Schema(
       type: String,
       default: "Bottom 1",
       enum: [
-        "Bottom 1st",
         "Top 1st",
-        "Bottom 2nd",
+        "Bottom 1st",
         "Top 2nd",
-        "Bottom 3rd",
+        "Bottom 2nd",
         "Top 3rd",
-        "Bottom 4th",
+        "Bottom 3rd",
         "Top 4th",
-        "Bottom 5th",
+        "Bottom 4th",
         "Top 5th",
+        "Bottom 5th",
+        "Top 6th",
         "Bottom 6th",
-        "Top 6th"
+        "MATCH OVER"
       ]
     },
     extraInnings: {
