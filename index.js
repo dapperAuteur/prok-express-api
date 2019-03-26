@@ -18,10 +18,15 @@ const tagRoutes = require("./routes/routes_tags");
 const teamRoutes = require("./routes/routes_teams");
 const userRoutes = require("./routes/routes_users");
 
-const MAX_AGE = 1000 * 60 * 5;
+const MAX_AGE = 1000 * 60 * 60;
 const IN_PROD = process.env.NODE_ENV === "production";
 
-app.use(cors());
+const config = {
+  origin: "http://localhost:3000",
+  credentials: true
+};
+
+app.use(cors(config));
 app.use(
   session({
     cookie: {
@@ -76,11 +81,7 @@ app.put(
   authMiddleware.loginRequired,
   matchRoutes
 );
-app.delete(
-  `${apiVersion}/matches/:matchId`,
-  authMiddleware.loginRequired,
-  matchRoutes
-);
+app.delete(`${apiVersion}/matches/:matchId`, matchRoutes);
 app.use(`${apiVersion}/matches`, matchRoutes);
 
 app.get(`${apiVersion}/players`, playerRoutes);

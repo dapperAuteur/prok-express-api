@@ -8,7 +8,11 @@ exports.signin = function(req, res) {
         if (isMatch) {
           user.password = "";
           req.session.user = user;
-          res.status(201).json(user);
+          res.session = req.session;
+          console.log("res 12", res.session);
+          console.log("res.cookie", res.cookie);
+          // res.cookie = ("session",res.session);
+          res.status(201).json({ session: res.session });
         } else {
           res.status(400).json({ message: "Invalid Email/Password." });
         }

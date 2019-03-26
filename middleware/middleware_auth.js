@@ -1,13 +1,15 @@
 exports.loginRequired = function(req, res, next) {
   const user = req.session.user;
+  console.log("user 3", user);
   if (user._id) {
+    console.log("user 5", user);
     next();
   } else {
     res.status(401).json({ message: "Please log in first" });
   }
-  res.status(401).json({
-    message: "There was a problem with your request. Are you logged in?"
-  });
+  // res.status(401).json({
+  //   message: "There was a problem with your request. Are you logged in?"
+  // });
 };
 
 exports.ensureCorrectUserRole = function(req, res, next) {

@@ -55,7 +55,7 @@ const matchSchema = new mongoose.Schema(
     },
     currentInning: {
       type: String,
-      default: "Bottom 1",
+      default: "Top 1st",
       enum: [
         "Top 1st",
         "Bottom 1st",

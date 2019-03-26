@@ -14,6 +14,7 @@ exports.getMatches = function(req, res) {
 exports.createMatch = function(req, res) {
   Match.create(req.body)
     .then(function(newMatch) {
+      console.log("newMatch", newMatch);
       res.status(201).json(newMatch);
     })
     .catch(function(err) {
