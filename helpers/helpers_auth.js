@@ -28,7 +28,8 @@ exports.signup = function(req, res, next) {
     .then(function(user) {
       user.password = "";
       req.session.user = user;
-      res.status(201).json(user);
+      res.session = req.session;
+      res.status(201).json({ session: res.session });
     })
     .catch(function(err) {
       res.status(400).json(err);
@@ -38,9 +39,10 @@ exports.signup = function(req, res, next) {
 exports.signout = function(req, res) {
   req.session.destroy(err => {
     if (err) {
+      console.log("err", err);
       res.status(400).json(err);
     }
-    res.clearCookie(SESS_NAME);
+    res.clearCookie("sid");
     res.status(201).json({ message: "user logged out" });
   });
 };

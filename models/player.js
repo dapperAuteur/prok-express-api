@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const playerSchema = new mongoose.Schema(
   {
+    nickname: {
+      type: String,
+      minlength: 1
+    },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
