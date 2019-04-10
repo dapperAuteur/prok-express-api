@@ -5,7 +5,7 @@ This project was bootstrapped with [Node Express](http://bit.ly/2U6uy33).
 The is the front end of the app is a [Create React App](https://github.com/facebook/create-react-app) and may be used with the [Express](http://bit.ly/2YnxYln) or [Java Spring](http://bit.ly/2Z1VZyT) backend. The Express backend is further along than the Java Spring backend at the moment. This is the repo for the Express backend.
 
 ### `Tech Used`
-Other than the React, you may find the following tools used in this repo:
+Other than the Node, you may find the following tools used in this repo:
 - bcrypt: encrypt strings, specifically passwords
 - body-parser: to consume and read data in the body of HTTP requests
 - connect-mongo: to connect to mongodb
