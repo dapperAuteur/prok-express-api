@@ -22,7 +22,7 @@ const MAX_AGE = 1000 * 60 * 60;
 const IN_PROD = process.env.NODE_ENV === "production";
 
 const config = {
-  origin: "http://localhost:3001",
+  origin: "http://localhost:3000",
   credentials: true
 };
 
