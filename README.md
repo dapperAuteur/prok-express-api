@@ -2,7 +2,7 @@
 This is a passion project. I am the world's first professional kickball player. I managed an adult kickball league for [WAKA](http://bit.ly/2Z3kKuw). I created this application so that players and fans. It's ESPN.com for kickball. Users will be able to see match scores and match status in real-time.
 This project was bootstrapped with [Node Express](http://bit.ly/2U6uy33).
 
-The is the front end of the app is a [Create React App](https://github.com/facebook/create-react-app) and may be used with the [Express](http://bit.ly/2YnxYln) or [Java Spring](http://bit.ly/2Z1VZyT) backend. The Express backend is further along than the Java Spring backend at the moment. This is the repo for the Express backend.
+The repo for the front end of the app is [here](http://bit.ly/2YU3Fmy). It's a [Create React App](https://github.com/facebook/create-react-app) and may be used with the [Express](http://bit.ly/2YnxYln) or [Java Spring](http://bit.ly/2Z1VZyT) backend. The Express backend is further along than the Java Spring backend at the moment. This is the repo for the Express backend.
 
 ### `Tech Used`
 Other than the Node, you may find the following tools used in this repo:
