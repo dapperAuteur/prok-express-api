@@ -8,7 +8,8 @@ const matchSchema = new mongoose.Schema(
     },
     homeTeam: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Team"
+      ref: "Team",
+      default: "5c9a9ef3e6814f122a1af324"
     },
     homeTeamKickingOrder: [
       {
@@ -23,7 +24,8 @@ const matchSchema = new mongoose.Schema(
     },
     awayTeam: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Team"
+      ref: "Team",
+      default: "5c9a9e2be6814f122a1af322"
     },
     awayTeamKickingOrder: [
       {
