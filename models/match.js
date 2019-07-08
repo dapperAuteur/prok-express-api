@@ -4,7 +4,8 @@ const matchSchema = new mongoose.Schema(
   {
     scoreKeeper: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
+      ref: "User",
+      default: "5d22970a499e9942a5834873"
     },
     homeTeam: {
       type: mongoose.Schema.Types.ObjectId,
