@@ -90,7 +90,7 @@ const matchSchema = new mongoose.Schema(
     },
     matchComplete: {
       type: Boolean,
-      default: true
+      default: false
     },
     balls: {
       type: Number,
