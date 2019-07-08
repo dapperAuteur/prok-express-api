@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-// checking if gitkraken is the issue
+
 const matchSchema = new mongoose.Schema(
   {
     scoreKeeper: {
