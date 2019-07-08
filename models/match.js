@@ -79,13 +79,18 @@ const matchSchema = new mongoose.Schema(
         "MATCH OVER"
       ]
     },
+    matchType: {
+      type: String,
+      default: "friendly",
+      enum: ["friendly", "season", "playoff", "tournament", "charity"]
+    },
     extraInnings: {
       type: Boolean,
       default: false
     },
-    maatchComplete: {
+    matchComplete: {
       type: Boolean,
-      default: false
+      default: true
     },
     balls: {
       type: Number,
