@@ -83,6 +83,10 @@ const matchSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
+    maatchComplete: {
+      type: Boolean,
+      default: false
+    },
     balls: {
       type: Number,
       default: 0,
