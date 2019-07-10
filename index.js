@@ -26,7 +26,31 @@ const config = {
   credentials: true
 };
 
+const PORT = process.env.PORT || 8080;
+
 app.use(cors(config));
+
+// app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`));
+
+mongoose.set("debug", true);
+mongoose.Promise = global.Promise;
+mongoose
+  .connect(process.env.MONGODB_URI || "mongodb://localhost/prok-db", {
+    keepAlive: true,
+    reconnectTries: Number.MAX_VALUE,
+    useNewUrlParser: true,
+    useCreateIndex: true
+  })
+  .then(result => {
+    const server = app.listen(PORT, () =>
+      console.log(`app is listening on PORT ${PORT}`)
+    );
+    const io = require("./socket").init(server);
+    io.on("connect", socket => {
+      console.log("client connected");
+    });
+  });
+
 app.use(
   session({
     cookie: {
@@ -182,6 +206,6 @@ app.use(`${apiVersion}/users`, userRoutes);
 
 app.use(`${apiVersion}/auth`, authRoutes);
 
-const PORT = process.env.PORT || 8080;
+// const PORT = process.env.PORT || 8080;
 
-app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`));
+// app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`));

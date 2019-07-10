@@ -1,4 +1,5 @@
 const db = require("./../models");
+const io = require("./../socket");
 const Match = db.Match;
 
 exports.getMatches = function(req, res) {
@@ -14,7 +15,8 @@ exports.getMatches = function(req, res) {
 exports.createMatch = function(req, res) {
   Match.create(req.body)
     .then(function(newMatch) {
-      console.log("newMatch", newMatch);
+      // console.log("newMatch", newMatch);
+      io.getIO().emit("createMatch", { action: "create", newMatch: newMatch });
       res.status(201).json(newMatch);
     })
     .catch(function(err) {
