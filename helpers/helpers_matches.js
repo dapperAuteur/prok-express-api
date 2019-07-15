@@ -16,7 +16,10 @@ exports.createMatch = function(req, res) {
   Match.create(req.body)
     .then(function(newMatch) {
       // console.log("newMatch", newMatch);
-      io.getIO().emit("createMatch", { action: "create", newMatch: newMatch });
+      io.getIO().emit("createdMatch", {
+        action: "createdMatch",
+        newMatch: newMatch
+      });
       res.status(201).json(newMatch);
     })
     .catch(function(err) {
@@ -37,8 +40,8 @@ exports.getMatch = function(req, res) {
 exports.updateMatch = function(req, res) {
   Match.findOneAndUpdate({ _id: req.params.matchId }, req.body, { new: true })
     .then(function(updatedMatch) {
-      io.getIO().emit("updateMatch", {
-        action: "update",
+      io.getIO().emit("updatedMatch", {
+        action: "updatedMatch",
         updatedMatch: updatedMatch
       });
       res.status(201).json(updatedMatch);

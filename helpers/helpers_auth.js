@@ -9,8 +9,8 @@ exports.signin = function(req, res) {
           user.password = "";
           req.session.user = user;
           res.session = req.session;
-          console.log("res 12", res.session);
-          console.log("res.cookie", res.cookie);
+          // console.log("res 12", res.session);
+          // console.log("res.cookie", res.cookie);
           // res.cookie = ("session",res.session);
           res.status(201).json({ session: res.session });
         } else {

@@ -1,8 +1,8 @@
 exports.loginRequired = function(req, res, next) {
   const user = req.session.user;
-  console.log("user 3", user);
+  // console.log("user 3", user);
   if (user._id) {
-    console.log("user 5", user);
+    // console.log("user 5", user);
     next();
   } else {
     res.status(401).json({ message: "Please log in first" });
