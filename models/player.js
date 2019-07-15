@@ -35,6 +35,10 @@ const playerSchema = new mongoose.Schema(
       type: Number,
       default: 0,
       min: 0
+    },
+    currentlyPlaying: {
+      type: Boolean,
+      default: false
     }
   },
   {
