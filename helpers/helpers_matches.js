@@ -37,7 +37,11 @@ exports.getMatch = function(req, res) {
 exports.updateMatch = function(req, res) {
   Match.findOneAndUpdate({ _id: req.params.matchId }, req.body, { new: true })
     .then(function(updatedMatch) {
-      res.json(updatedMatch);
+      io.getIO().emit("updateMatch", {
+        action: "update",
+        updatedMatch: updatedMatch
+      });
+      res.status(201).json(updatedMatch);
     })
     .catch(function(err) {
       res.send(err);
@@ -47,6 +51,10 @@ exports.updateMatch = function(req, res) {
 exports.deleteMatch = function(req, res) {
   Match.remove({ _id: req.params.matchId })
     .then(function() {
+      io.getIO().emit("deleteMatch", {
+        action: "delete",
+        deleteMatch: req.params.matchId
+      });
       res.json({
         message: `Match ${req.params.matchId} deleted`,
         matchId: req.params.matchId
