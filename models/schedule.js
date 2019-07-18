@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const scheduleSchema = new mongoose.Schema({
-  manager: {
+  scheduleManager: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
   },

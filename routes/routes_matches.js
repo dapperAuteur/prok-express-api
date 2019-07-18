@@ -11,7 +11,7 @@ router
 router
   .route("/:matchId")
   .get(helpersMatches.getMatch)
-  .put(helpersMatches.updateMatch)
+  // .put(helpersMatches.updateMatch)
   .patch(helpersMatches.updateMatch)
   .delete(helpersMatches.deleteMatch);
 
