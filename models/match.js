@@ -41,27 +41,27 @@ const matchSchema = new mongoose.Schema(
     },
     currentInning: {
       type: String,
-      default: "Top 1st",
+      default: "TOP 1ST",
       enum: [
-        "Top 1st",
-        "Bottom 1st",
-        "Top 2nd",
-        "Bottom 2nd",
-        "Top 3rd",
-        "Bottom 3rd",
-        "Top 4th",
-        "Bottom 4th",
-        "Top 5th",
-        "Bottom 5th",
-        "Top 6th",
-        "Bottom 6th",
+        "TOP 1ST",
+        "BOTTOM 1ST",
+        "TOP 2ND",
+        "BOTTOM 2nd",
+        "TOP 3RD",
+        "BOTTOM 3RD",
+        "TOP 4TH",
+        "BOTTOM 4TH",
+        "TOP 5TH",
+        "BOTTOM 5TH",
+        "TOP 6TH",
+        "BOTTOM 6TH",
         "MATCH OVER"
       ]
     },
     matchType: {
       type: String,
-      default: "friendly",
-      enum: ["friendly", "season", "playoff", "tournament", "charity"]
+      default: "FRIENDLY",
+      enum: ["FRIENDLY", "SEASON", "PLAYOFF", "TOURNAMENT", "CHARITY"]
     },
     extraInnings: {
       type: Boolean,
@@ -106,7 +106,8 @@ const matchSchema = new mongoose.Schema(
     },
     lengthMeasured: {
       type: String,
-      default: "Innings"
+      default: "INNINGS",
+      enum: ["INNINGS", "TIME"]
     },
     startTime: {
       type: Date,
