@@ -39,27 +39,6 @@ const matchSchema = new mongoose.Schema(
       default: 0,
       min: 0
     },
-    locationAddress: {
-      type: String
-    },
-    locationName: {
-      type: String
-    },
-    locationGPS: {
-      type: String
-    },
-    locationCity: {
-      type: String
-    },
-    locationState: {
-      type: String
-    },
-    locationZipCode: {
-      type: String
-    },
-    field: {
-      type: String
-    },
     currentInning: {
       type: String,
       default: "Top 1st",
