@@ -12,6 +12,7 @@
 module.exports.League = require("./league");
 // module.exports.Manager = require("./manager");
 module.exports.Match = require("./match");
+module.exports.MatchLocation = require("./matchLocation");
 module.exports.Player = require("./player");
 module.exports.Schedule = require("./schedule");
 module.exports.Tag = require("./tag");
