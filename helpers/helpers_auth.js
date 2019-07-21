@@ -3,11 +3,12 @@ const User = db.User;
 
 exports.signin = function(req, res) {
   User.findOne({ username: req.body.username })
-    .then(function(user) {
-      user.comparePassword(req.body.password, function(err, isMatch) {
+    .then(function(currentUser) {
+      currentUser.comparePassword(req.body.password, function(err, isMatch) {
         if (isMatch) {
-          user.password = "";
-          req.session.user = user;
+          currentUser.password = "";
+          // req.session.user = user;
+          req.session.currentUser = currentUser;
           res.session = req.session;
           // console.log("res 12", res.session);
           // console.log("res.cookie", res.cookie);
@@ -25,9 +26,10 @@ exports.signin = function(req, res) {
 
 exports.signup = function(req, res, next) {
   User.create(req.body)
-    .then(function(user) {
-      user.password = "";
-      req.session.user = user;
+    .then(function(currentUser) {
+      currentUser.password = "";
+      // req.session.user = user;
+      req.session.currentUser = currentUser;
       res.session = req.session;
       res.status(201).json({ session: res.session });
     })
