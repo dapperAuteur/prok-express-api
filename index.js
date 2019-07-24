@@ -9,15 +9,6 @@ const MongoStore = require("connect-mongo")(session);
 
 const authMiddleware = require("./middleware/middleware_auth");
 
-const authRoutes = require("./routes/routes_auth");
-const leagueRoutes = require("./routes/routes_leagues");
-const matchRoutes = require("./routes/routes_matches");
-const playerRoutes = require("./routes/routes_players");
-const scheduleRoutes = require("./routes/routes_schedules");
-const tagRoutes = require("./routes/routes_tags");
-const teamRoutes = require("./routes/routes_teams");
-const userRoutes = require("./routes/routes_users");
-
 const MAX_AGE = 1000 * 60 * 60;
 const IN_PROD = process.env.NODE_ENV === "production";
 
@@ -45,10 +36,8 @@ mongoose
     const server = app.listen(PORT, () =>
       console.log(`app is listening on PORT ${PORT}`)
     );
-    const io = require("./socket").init(server);
-    io.on("connect", socket => {
-      console.log("client connected");
-    });
+
+    console.log("client connected");
   });
 
 app.use(
