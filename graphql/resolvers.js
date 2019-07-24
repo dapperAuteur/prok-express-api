@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("./../models/user");
+const Match = require("./../models/match");
 
 module.exports = {
   hello() {
@@ -27,6 +28,14 @@ module.exports = {
       ...req.session
       // ...createdUser._doc,
       // _id: createdUser._id.toString()
+    };
+  },
+  matchFeed: async function(req, res) {
+    const matchesCount = await Match.find().countDocuments();
+    const matches = Match.find();
+    return {
+      matches,
+      matchesCount
     };
   }
 };

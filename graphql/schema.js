@@ -1,6 +1,10 @@
 const { buildSchema } = require("graphql");
 
 module.exports = buildSchema(`
+enum MatchOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+}
 type Session {
     cookie: Cookie
     user: User
@@ -27,8 +31,42 @@ type Session {
     username: String!
     password: String!
   }
+
+  type MatchFeed {
+    matches: [Match!]!
+    matchesCount: Int!
+  }
+
+  type Match {
+    id: ID!
+    scoreKeeper: User!
+    awayTeam: String!
+    homeTeam: String!
+    awayTeamScore: Int
+    homeTeamScore: Int
+    currentInning: String
+    matchType: String
+    balls: Int
+    strikes: Int
+    fouls: Int
+    outs: Int
+    extraInnings: Boolean!
+    encroachmentWarning: Boolean!
+    matchComplete: Boolean!
+    matchLength: Int!
+    lengthMeasured: String!
+    startTime: String
+  }
+
   type RootQuery{
     hello: String
+    matchFeed(
+    filter: String
+    skip: Int
+    first: Int
+    last: Int
+    orderBy: MatchOrderByInput
+  ): MatchFeed!
   }
   schema {
     query: RootQuery
