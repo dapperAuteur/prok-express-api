@@ -42,7 +42,7 @@ app.use(
   })
 );
 app.use(
-  "/graphql",
+  "/api/ver0001/graphql",
   (req, _, next) => {
     // console.log("req.session", req.session);
     return next();
@@ -50,7 +50,20 @@ app.use(
   graphqlHttp({
     schema: graphqlSchema,
     rootValue: graphqlResolver,
-    graphiql: true
+    graphiql: true,
+    customFormatErrorFn(err) {
+      if (!err.originalError) {
+        return err;
+      }
+      const data = err.originalError.data;
+      const message = err.message || "An error occurred";
+      const code = err.originalError.code || 500;
+      return {
+        message: message,
+        status: code,
+        data: data
+      };
+    }
   })
 );
 

@@ -1,4 +1,6 @@
 const bcrypt = require("bcrypt");
+const validator = require("validator");
+
 const User = require("./../models/user");
 const Match = require("./../models/match");
 
@@ -8,6 +10,22 @@ module.exports = {
   },
   signUp: async function({ userInput }, req) {
     const { username, password } = userInput;
+    const errors = [];
+    if (!validator.isEmail(username)) {
+      errors.push({ message: "username must be a valid email" });
+    }
+    if (
+      validator.isEmpty(password) ||
+      !validator.isLength(password, { min: 5 })
+    ) {
+      errors.push({ message: "password is too short" });
+    }
+    if (errors.length > 0) {
+      const error = new Error("Invalid input");
+      error.data = errors;
+      error.code = 422;
+      throw error;
+    }
     const existingUser = await User.findOne({ username: userInput.username });
     if (existingUser) {
       const error = new Error("User exists already");
