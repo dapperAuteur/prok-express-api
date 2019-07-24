@@ -3,6 +3,7 @@ const validator = require("validator");
 
 const User = require("./../models/user");
 const Match = require("./../models/match");
+const Team = require("./../models/team");
 
 module.exports = {
   hello() {
@@ -54,6 +55,14 @@ module.exports = {
     return {
       matches,
       matchesCount
+    };
+  },
+  teamFeed: async function(req, res) {
+    const teamsCount = await Team.find().countDocuments();
+    const teams = Team.find();
+    return {
+      teams,
+      teamsCount
     };
   }
 };
