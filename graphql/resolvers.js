@@ -86,5 +86,54 @@ module.exports = {
       teams,
       teamsCount
     };
+  },
+  userFeed: async function(req, res) {
+    const usersCount = await User.find().countDocuments();
+    const users = User.find();
+    return {
+      users,
+      usersCount
+    };
+  },
+  createMatch: async function({ userInput }, req) {
+    const { scoreKeeper, awayTeam, homeTeam } = userInput;
+    const errors = [];
+    console.log("scoreKeeper", scoreKeeper);
+    const scoreKeeperFound = await User.findById({ _id: scoreKeeper });
+    console.log("scoreKeeperFound", scoreKeeperFound);
+    if (!scoreKeeperFound) {
+      console.log("104 scoreKeeperFound", scoreKeeperFound);
+      errors.push({ message: "scoreKeeper not found" });
+    }
+    const awayTeamFound = await Team.findById({ _id: awayTeam });
+    console.log("awayTeamFound", awayTeamFound);
+    if (!awayTeamFound) {
+      errors.push({ message: "awayTeam not found" });
+    }
+    const homeTeamFound = await Team.findById({ _id: homeTeam });
+    console.log("homeTeamFound", homeTeamFound);
+    if (!homeTeamFound) {
+      errors.push({ message: "homeTeam not found" });
+    }
+    if (errors.length > 0) {
+      const error = new Error("invalid input");
+      error.data = errors;
+      error.code = 422;
+      throw error;
+    }
+    const newMatch = new Match({
+      scoreKeeper: scoreKeeperFound._id,
+      awayTeam: awayTeamFound._id,
+      homeTeam: homeTeamFound._id
+    });
+    const createdMatch = await newMatch.save();
+    req.createdMatch = createdMatch;
+    console.log("req.data", req);
+    return {
+      ...createdMatch._doc,
+      _id: createdMatch._id.toString(),
+      createdAt: createdMatch.createdAt.toISOString(),
+      updatedAt: createdMatch.updatedAt.toISOString()
+    };
   }
 };
