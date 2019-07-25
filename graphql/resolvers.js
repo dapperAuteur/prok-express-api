@@ -22,9 +22,10 @@ module.exports = {
       errors.push({ message: "password is too short" });
     }
     if (errors.length > 0) {
-      const error = new Error("Invalid input");
+      const error = new Error("Invalid user input");
       error.data = errors;
       error.code = 422;
+      console.log("error", error);
       throw error;
     }
     const existingUser = await User.findOne({ username: userInput.username });
@@ -39,14 +40,35 @@ module.exports = {
     });
     const createdUser = await user.save();
     createdUser.password = "";
-    // console.log("0 req.session", req.session);
     req.session.currentUser = createdUser;
     req.session.user = createdUser;
-    // console.log("1 req.session", req.session);
     return {
       ...req.session
-      // ...createdUser._doc,
-      // _id: createdUser._id.toString()
+    };
+  },
+  login: async function({ userInput }, req) {
+    const { username, password } = userInput;
+    const errors = [];
+    const user = await User.findOne({ username: userInput.username });
+    if (!user) {
+      errors.push({ message: "invalid username/password" });
+    }
+    const isEqual = await bcrypt.compare(password, user.password);
+    if (!isEqual) {
+      errors.push({ message: "invalid username/password" });
+    }
+
+    if (errors.length > 0) {
+      const error = new Error("Invalid user input");
+      error.data = errors;
+      error.code = 422;
+      console.log("error", error);
+      throw error;
+    }
+    req.session.currentUser = user;
+    req.session.user = user;
+    return {
+      ...req.session
     };
   },
   matchFeed: async function(req, res) {

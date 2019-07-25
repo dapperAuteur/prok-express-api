@@ -26,7 +26,6 @@ const PORT = process.env.PORT || 8080;
 
 app.use(cors(config));
 
-// app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`));
 app.use(
   session({
     cookie: {
@@ -44,7 +43,7 @@ app.use(
 app.use(
   "/api/ver0001/graphql",
   (req, _, next) => {
-    // console.log("req.session", req.session);
+    console.log("req made");
     return next();
   },
   graphqlHttp({
@@ -53,8 +52,10 @@ app.use(
     graphiql: true,
     customFormatErrorFn(err) {
       if (!err.originalError) {
+        console.log("err", err);
         return err;
       }
+      console.log("err", err);
       const data = err.originalError.data;
       const message = err.message || "An error occurred";
       const code = err.originalError.code || 500;
@@ -80,13 +81,7 @@ mongoose
     const server = app.listen(PORT, () =>
       console.log(`app is listening on PORT ${PORT}`)
     );
-
-    console.log("client connected");
   });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// const PORT = process.env.PORT || 8080;
-
-// app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`));

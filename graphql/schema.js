@@ -41,6 +41,7 @@ type Session {
   
   type RootMutation {
     signUp(userInput: UserInputData): Session!
+    login(userInput: UserInputData): Session!
   }
 
   input UserInputData {
