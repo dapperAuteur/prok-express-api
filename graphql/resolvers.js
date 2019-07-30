@@ -99,7 +99,7 @@ module.exports = {
   createMatch: async function({ userInput }, req) {
     const { scoreKeeper, awayTeam, homeTeam } = userInput;
     const errors = [];
-    console.log("scoreKeeper", scoreKeeper);
+    // console.log("scoreKeeper", scoreKeeper);
     const scoreKeeperFound = await User.findById({ _id: scoreKeeper });
     console.log("scoreKeeperFound", scoreKeeperFound);
     if (!scoreKeeperFound) {
@@ -129,12 +129,46 @@ module.exports = {
     });
     const createdMatch = await newMatch.save();
     req.createdMatch = createdMatch;
-    console.log("req.data", req);
+    // console.log("req.data", req);
     return {
       ...createdMatch._doc,
       _id: createdMatch._id.toString(),
       createdAt: createdMatch.createdAt.toISOString(),
       updatedAt: createdMatch.updatedAt.toISOString()
     };
+  },
+  updateMatch: async function({ userInput }, req) {
+    let errors = [];
+    const {
+      _id,
+      awayTeamScore,
+      homeTeamScore,
+      balls,
+      strikes,
+      fouls,
+      outs,
+      currentInning
+    } = userInput;
+    console.log("userInput", userInput);
+    const match = {
+      _id,
+      awayTeamScore,
+      homeTeamScore,
+      balls,
+      strikes,
+      fouls,
+      outs,
+      currentInning
+    };
+    const foundMatch = Match.findByIdAndUpdate({ _id: _id }, match, {
+      new: true
+    });
+    if (!foundMatch) {
+      console.log(`matchId ${matchId} not found`);
+    }
+    console.log("foundMatch", foundMatch);
+    // let updatedMatch =
+    // console.log("req", req);
+    return foundMatch;
   }
 };

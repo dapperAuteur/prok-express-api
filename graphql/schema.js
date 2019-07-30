@@ -82,6 +82,16 @@ module.exports = buildSchema(`
     awayTeam: String!
     homeTeam: String!
   }
+  input UpdateMatchInputData {
+    _id: String!
+    awayTeamScore: String
+    homeTeamScore: String
+    balls: String
+    strikes: String
+    fouls: String
+    outs: String
+    currentInning: String
+  }
 
   type Player {
     _id: ID!
@@ -139,6 +149,7 @@ module.exports = buildSchema(`
     signUp(userInput: UserInputData): Session!
     login(userInput: UserInputData): Session!
     createMatch(userInput: MatchInputData): Match!
+    updateMatch(userInput: UpdateMatchInputData): Match!
   }
 
   schema {
