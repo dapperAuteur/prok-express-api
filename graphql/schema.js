@@ -111,6 +111,7 @@ module.exports = buildSchema(`
   }
 
   type RootQuery{
+    login(userInput: UserInputData): Session!
     hello: String
     matchFeed(
       filter: String

@@ -47,6 +47,7 @@ module.exports = {
     };
   },
   login: async function({ userInput }, req) {
+    console.log("userInput", userInput);
     const { username, password } = userInput;
     const errors = [];
     const user = await User.findOne({ username: userInput.username });
